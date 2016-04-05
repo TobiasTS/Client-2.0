@@ -44,17 +44,20 @@ public class ClientView extends JFrame {
 		add(loginView);
 		
 		pack();
-		// Set Frame size and location
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds(0,0,screenSize.width /4, screenSize.height /4); 									//Size
-        setLocation(screenSize.width/2-getSize().width/2, screenSize.height/2-getSize().height/2); 	//Location
-		
+		setMiddle();		
 		setVisible(true);
 		
 	}
 	
 	public String getLoginName() {
 		return loginView.getLoginName();
+	}
+	
+	private void setMiddle(){
+		// Set Frame size and location
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds(0,0,screenSize.width /4, screenSize.height /4); 									//Size
+        setLocation(screenSize.width/2-getSize().width/2, screenSize.height/2-getSize().height/2); 	//Location
 	}
 	
 	public void clearScreen() {
