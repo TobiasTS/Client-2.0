@@ -23,6 +23,10 @@ public class ClientController implements ActionListener {
 	public ClientModel getModel() {
 		return model;
 	}
+	
+	public ClientView getView() {
+		return view;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -43,9 +47,8 @@ public class ClientController implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
-	}
-	
-	public ClientView getView() {
-		return view;
+		if(e.getActionCommand().contains("CHALLENGE")) {
+			System.out.println(e.getActionCommand());
+		}
 	}
 }
