@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.IOException;
+
 import Main.ClientController;
 
 public class ServerMessageHandler {
@@ -25,12 +27,21 @@ public class ServerMessageHandler {
 	
 	public void handleMessage(String message) {
 		if(message.equals(messageloginError)) {
-			controller.getView().setLoginScreen();
+			System.out.println("ERROR LOGIN");
+			try {
+				controller.getModel().closeConnection();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		if(message.equals(messageOk)) {
-			if(!controller.getModel().loggedIn) {
-				controller.getModel().loggedIn = true;
-				controller.getView().setLobbyScreen();
+		else if(message.equals(messageOk)) {
+			if(!controller.getModel().getLoggedIn()) {
+				controller.getModel().changeLoggedIn();
+				try {
+					controller.getModel().getPlayerListCommand();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			System.out.println("OK");
 		}
@@ -38,22 +49,22 @@ public class ServerMessageHandler {
 			System.out.println("ERROR");
 		}
 		else if(message.contains(messageMatch)) {
-			System.out.println("ERROR");
+			System.out.println("MATCH");
 		}
 		else if(message.contains(messageYourTurn)) {
-			System.out.println("ERROR");
+			System.out.println("YOURTURN");
 		}
 		else if(message.contains(messageMove)) {
-			System.out.println("ERROR");
+			System.out.println("MOVE");
 		}
 		else if(message.contains(messageResult)) {
-			System.out.println("ERROR");
+			System.out.println("RESULT");
 		}
 		else if(message.contains(messageChallenge)) {
-			System.out.println("ERROR");
+			System.out.println("CHALLENGE");
 		}
 		else if(message.contains(messageChallengeCancelled)) {
-			System.out.println("ERROR");
+			System.out.println("CANCELLED");
 		}
 		else if(message.contains(messageHelp)) {
 			System.out.println("HELP");
@@ -63,6 +74,8 @@ public class ServerMessageHandler {
 		}
 		else if(message.contains(messagePlayerlist)) {
 			System.out.println("PLAYERLIST");
+			controller.getModel().setPlayerList(message);
+			controller.getView().setLobbyScreen();
 		}
 		else {
 			System.out.println("DEFAULT");

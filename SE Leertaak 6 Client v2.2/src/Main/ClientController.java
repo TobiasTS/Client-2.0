@@ -13,7 +13,7 @@ public class ClientController implements ActionListener {
 	private ClientView view;
 	
 	public ClientController() {
-		view = new ClientView(this);
+		view = new ClientView("Client v2.2", this);
 	}
 	
 	public void setModel(ClientModel model) {
@@ -22,10 +22,6 @@ public class ClientController implements ActionListener {
 	
 	public ClientModel getModel() {
 		return model;
-	}
-	
-	public ClientView getView() {
-		return view;
 	}
 
 	@Override
@@ -47,8 +43,16 @@ public class ClientController implements ActionListener {
 				e1.printStackTrace();
 			}
 		}
-		if(e.getActionCommand().contains("CHALLENGE")) {
-			System.out.println(e.getActionCommand());
+		if(e.getActionCommand().equals("UPDATEPLAYERLIST")) {
+			try {
+				model.getPlayerListCommand();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		}
+	}
+	
+	public ClientView getView() {
+		return view;
 	}
 }
