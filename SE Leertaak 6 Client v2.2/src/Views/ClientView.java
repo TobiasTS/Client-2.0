@@ -99,15 +99,18 @@ public class ClientView extends JFrame {
 		if(currentScreen != LOBBYSCREEN) {
 			clearScreen();
 			try {
-				controller.getModel().getGameListCommand();
-				while (controller.getModel().getGameList() == null); //Wait for server
+				controller.getModel().getPlayerListCommand();
+				while (controller.getModel().getPlayerList() == null){
+					Thread.sleep(100);
+				}; //Wait for server
+				
 				lobbyView.createTable(controller, controller.getModel().getPlayerList());
 				add(lobbyView);
 				lobbyView.setVisible(true);
 				menuFile.setEnabled(true);
 				pack();
 				currentScreen = LOBBYSCREEN;
-			} catch (IOException ex) {
+			} catch (IOException | InterruptedException ex) {
 				ex.printStackTrace();
 			}
 		}

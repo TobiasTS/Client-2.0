@@ -12,7 +12,7 @@ public class ClientModel {
 	
 	private ClientController controller;
 	private ClientSocket clientSocket;
-	private boolean messageChecked;
+//	private boolean messageChecked;
 	private boolean human;
 	private boolean loggedIn = false;
 	private String clientName = "";
@@ -76,13 +76,13 @@ public class ClientModel {
 		return clientName;
 	}
 	
-	public void setMessageChecked(boolean value) {
-		messageChecked = value;
-	}
-	
-	public boolean getMessageChecked() {
-		return messageChecked;
-	}
+//	public void setMessageChecked(boolean value) {
+//		messageChecked = value;
+//	}
+//	
+//	public boolean getMessageChecked() {
+//		return messageChecked;
+//	}
 	
 	public void setHuman(boolean human) {
 		this.human = human;
@@ -199,6 +199,10 @@ public class ClientModel {
 		else {
 			loggedIn = true;
 		}
+	}
+	
+	public void setLogIn(boolean loggedIn) {
+		this.loggedIn = loggedIn;
 	}
 	
 	public boolean isLoggedIn() {

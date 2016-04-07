@@ -29,17 +29,20 @@ public class ServerMessageHandler {
 	public void handleMessage(String message) {
 		if(message.equals(messageloginError)) {
 			System.out.println("ERROR LOGIN");
-			try {
-				controller.getModel().closeConnection();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			throw new IllegalArgumentException(message);
+//			try {
+//				controller.getModel().closeConnection();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+			
 		}
 		else if(message.equals(messageOk)) {
 			if(!controller.getModel().isLoggedIn()) {
 				controller.getModel().changeLoggedIn();
 				try {
 					controller.getModel().getPlayerListCommand();
+					controller.getModel().getGameListCommand();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -84,6 +87,6 @@ public class ServerMessageHandler {
 		else {
 			System.out.println("DEFAULT");
 		}
-		controller.getModel().setMessageChecked(true);
+//		controller.getModel().setMessageChecked(true);
 	}
 }

@@ -24,8 +24,7 @@ public class ClientSocket {
 	public void connectToServer() throws UnknownHostException, IOException {
 		socket = new Socket(IPADDRESS, PORTNUMBER);
 		Thread socketListener = new Thread(new SocketListener(socket, serverMessageHandler));
-		socketListener.start();			
-		System.out.println("CONNECTION MADE");
+		socketListener.start();	
 	}
 
 	public void writeToServer(String message) throws IOException {
@@ -34,10 +33,19 @@ public class ClientSocket {
 	}
 	
 	public String clientLogin(String name) throws IOException {
-		writeToServer("login " + name);
-		controller.getModel().setMessageChecked(false);
-		while(!controller.getModel().getMessageChecked()) {}
-		return name;
+		try {
+			writeToServer("login " + name);
+			controller.getModel().setLogIn(true);
+			return name;
+		} catch (IllegalArgumentException ex) {
+			ex.printStackTrace();
+			controller.getModel().setLogIn(false);
+			return "";
+		}
+		
+//		controller.getModel().setMessageChecked(false);
+//		while(!controller.getModel().getMessageChecked()) {}
+//		return name;
 	}
 
 }

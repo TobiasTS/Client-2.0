@@ -24,10 +24,11 @@ public class LobbyView extends JPanel implements ActionListener {
 		super(new FlowLayout());
 		setVisible(true);
 		this.controller = controller;
+		model = new RecordModel();
 	}
 	
 	public void createTable(ClientController controller, ArrayList<String> players) {
-		model = new RecordModel();
+		
 		Iterator<String> iterator = players.iterator();
 		while (iterator.hasNext()) {
 			model.addRecord(new Record(iterator.next(), controller));
@@ -37,7 +38,7 @@ public class LobbyView extends JPanel implements ActionListener {
 		table.setRowHeight(38);
 		table.setDefaultRenderer(Object.class, editorAndRenderer);
 	    table.setDefaultEditor(Object.class, editorAndRenderer);
-		table.setPreferredScrollableViewportSize(new Dimension(600, 400));
+		table.setPreferredScrollableViewportSize(new Dimension(400, 400));
 		table.setFillsViewportHeight(true);
 		add(new JScrollPane(table));
 	}
