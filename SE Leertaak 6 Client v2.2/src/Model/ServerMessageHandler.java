@@ -2,6 +2,7 @@ package Model;
 
 import java.io.IOException;
 
+import Main.ChallengeController;
 import Main.ClientController;
 
 public class ServerMessageHandler {
@@ -35,7 +36,7 @@ public class ServerMessageHandler {
 			}
 		}
 		else if(message.equals(messageOk)) {
-			if(!controller.getModel().getLoggedIn()) {
+			if(!controller.getModel().isLoggedIn()) {
 				controller.getModel().changeLoggedIn();
 				try {
 					controller.getModel().getPlayerListCommand();
@@ -50,6 +51,8 @@ public class ServerMessageHandler {
 		}
 		else if(message.contains(messageMatch)) {
 			System.out.println("MATCH");
+			controller.getModel().setMatch(message);
+			controller.createMatchController();
 		}
 		else if(message.contains(messageYourTurn)) {
 			System.out.println("YOURTURN");
@@ -62,6 +65,8 @@ public class ServerMessageHandler {
 		}
 		else if(message.contains(messageChallenge)) {
 			System.out.println("CHALLENGE");
+			controller.getModel().setChallenge(message);
+			controller.createChallengeController();
 		}
 		else if(message.contains(messageChallengeCancelled)) {
 			System.out.println("CANCELLED");
@@ -70,12 +75,11 @@ public class ServerMessageHandler {
 			System.out.println("HELP");
 		}
 		else if(message.contains(messageGamelist)) {
-			System.out.println("GAMELIST");
+			controller.getModel().setGameList(message);
 		}
 		else if(message.contains(messagePlayerlist)) {
 			System.out.println("PLAYERLIST");
 			controller.getModel().setPlayerList(message);
-			controller.getView().setLobbyScreen();
 		}
 		else {
 			System.out.println("DEFAULT");
