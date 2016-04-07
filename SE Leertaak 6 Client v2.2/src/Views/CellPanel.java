@@ -9,14 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 public class CellPanel extends JPanel {
+	
 	private static final long serialVersionUID = 1L;
 	private Record record;
     private final JLabel field = new JLabel();
     private Action challengeAction = new AbstractAction("Challenge") {
+		private static final long serialVersionUID = 1L;
+
 		public void actionPerformed(ActionEvent e) {
         	record.challenge();
         }
     };
+    
     private final JButton button = new JButton(challengeAction);
 
     public CellPanel() {

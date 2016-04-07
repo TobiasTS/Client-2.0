@@ -9,7 +9,7 @@ import Views.ChallengeView;
 import Views.ClientView;
 
 public class ClientController implements ActionListener {
-
+	
 	public static final String COMMAND_USER_LOGIN = "USERLOGIN";
 	public static final String COMMAND_AI_LOGIN = "AILOGIN";
 	public static final String COMMAND_LOGOUT = "LOGOUT";
@@ -36,27 +36,6 @@ public class ClientController implements ActionListener {
 	public ClientModel getModel() {
 		return model;
 	}
-	
-	public ClientView getView() {
-		return view;
-	}
-	
-	public void createChallengeController() {
-		ChallengeController challengeController = new ChallengeController();
-		challengeController.displayChallenge(model.getChallenge());
-		if (challengeController.challengeAccepted()) {
-			try {
-				model.acceptChallenge(model.getChallenge().getChallengeNumber());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	public void createMatchController() {
-		MatchController matchController = new MatchController();
-		matchController.startMatch(this);
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -67,7 +46,6 @@ public class ClientController implements ActionListener {
 			try {
 				model.loginClient(view.getLoginName());
 				model.setHuman(true);
-				view.setLobbyScreen();
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -76,7 +54,6 @@ public class ClientController implements ActionListener {
 			try {
 				model.loginClient(view.getLoginName());
 				model.setHuman(false);
-				view.setLobbyScreen();
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -84,7 +61,7 @@ public class ClientController implements ActionListener {
 		case COMMAND_LOGOUT:
 			try {
 				model.closeConnection();
-				System.exit(0);
+				view.setLoginScreen();
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
@@ -113,13 +90,29 @@ public class ClientController implements ActionListener {
 					if (game != null && player != null){
 						status = STATUS_READY;
 						try {
-							model.challengePlayer(game, player);;
+							model.challengePlayer(player, game);;
 						} catch (IOException ex) {
 							ex.printStackTrace();
 						}
 					}
 				}
 			break;
+		}
+	}
+	
+	public ClientView getView() {
+		return view;
+	}
+	
+	public void createChallengeController() {
+		ChallengeController challengeController = new ChallengeController();
+		challengeController.displayChallenge(model.getChallenge());
+		if (challengeController.challengeAccepted()) {
+			try {
+				model.acceptChallenge(model.getChallenge().getChallengeNumber());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

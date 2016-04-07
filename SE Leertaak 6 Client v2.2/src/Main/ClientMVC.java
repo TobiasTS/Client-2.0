@@ -10,6 +10,7 @@ public class ClientMVC {
 		controller = new ClientController();
 		model = new ClientModel(controller);
 		controller.setModel(model);
+		
 	}
 
 }
