@@ -3,7 +3,6 @@ package Main;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
 import Model.ClientModel;
 import Views.ChallengeView;
 import Views.ClientView;
@@ -27,7 +26,7 @@ public class ClientController implements ActionListener {
 	private int status = STATUS_READY;
 	
 	public ClientController() {
-		view = new ClientView("Client v2.2", this);
+		view = new ClientView("Client v2.6", this);
 	}
 	
 	public void setModel(ClientModel model) {

@@ -7,7 +7,6 @@ public class TicTacToeModel {
 	public static final int OPPONENT = 0;
     public static final int ME = 1;
     public static final char EMPTY = 'E';
-	
     
 	private TicTacToeController ticTacToeController;
 	private char board[][];
@@ -34,6 +33,15 @@ public class TicTacToeModel {
 	
 	public int getSide() {
 		return side;
+	}
+	
+	public char getChar(int side) {
+		if(side == ME) {
+			return myChar;
+		}
+		else {
+			return opponentChar;
+		}
 	}
 		
 	public char getMyChar() {
@@ -76,14 +84,18 @@ public class TicTacToeModel {
     public boolean isValidMove(int move) {
         return (move >= 0 && move <= 8 && board[move/3][move%3] == EMPTY);
     }
-	
+    
+    public void changeSide(int side) {
+    	this.side = side;
+    }
+
 	public void makeMove(int move) {
 		if (side == ME ) {
 			board[move/3][move%3] = myChar;
 		} else if (side == OPPONENT) {
 			board[move/3][move%3] = opponentChar;
 		}
-        side = side == ME ? OPPONENT : ME;
     }
+
 
 }
