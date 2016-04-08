@@ -34,7 +34,7 @@ public class TicTacToeButton extends JButton {
 		if(icon == 'X') {
 			setIcon(xImage);
 		}
-		else if (icon == 'O') {
+		else if(icon == 'O') {
 			setIcon(oImage);
 		}
 		setEnabled(false);

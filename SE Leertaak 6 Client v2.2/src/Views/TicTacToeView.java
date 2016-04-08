@@ -9,7 +9,6 @@ import Model.TicTacToeModel;
 
 public class TicTacToeView extends JPanel {
 	
-	
 	private static final long serialVersionUID = -6442309963858143796L;
 	private TicTacToeButton[][] buttons;
 	private TicTacToeController ticTacToeController;
@@ -21,7 +20,6 @@ public class TicTacToeView extends JPanel {
 		createButtons(ticTacToeController);
 	}
 
-	
 	public void createButtons(TicTacToeController ticTacToeController) {	
 		int move = 0;
 		for(int i = 0; i < buttons.length; i++) {
@@ -55,6 +53,7 @@ public class TicTacToeView extends JPanel {
 	}
 	
 	public void updateView(int x, int y, char icon) {
+		buttons[x][y].setEnabled(false);
 		buttons[x][y].setIcon(icon);
 		buttons[x][y].repaint();
 	}
