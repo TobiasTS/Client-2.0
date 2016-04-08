@@ -6,7 +6,5 @@ import java.awt.event.ActionListener;
 public abstract class GameController implements ActionListener{
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		
-	}
+	public abstract void actionPerformed(ActionEvent e);
 }

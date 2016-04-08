@@ -60,7 +60,7 @@ public class ServerMessageHandler {
 			
 		}
 		else if(message.contains(messageMove)) {
-			String move = messageMove + " " + controller.getModel().parseMove(message);
+			String move = "MOVE " + controller.getModel().parseMove(message);
 			controller.getMatchController().getGameController().actionPerformed(new ActionEvent(this, 0, move));
 			System.out.println("MOVE");
 		}

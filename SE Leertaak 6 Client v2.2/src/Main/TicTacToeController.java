@@ -35,25 +35,25 @@ public class TicTacToeController extends GameController {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getActionCommand());
+		System.out.println("TICTACTOE COMMAND: " + e.getActionCommand());
 		String command = e.getActionCommand().split(" ")[0];
 		String move = e.getActionCommand().split(" ")[1];
 		switch(command) {
 		case COMMAND_MOVE:
 			try {
-				
-					int x = Integer.parseInt(move) / TicTacToeController.AMOUNT_OF_ROWS_AND_COLUMNS;
-					int y = Integer.parseInt(move) % TicTacToeController.AMOUNT_OF_ROWS_AND_COLUMNS;
-					if (ticTacToeModel.getSide() == TicTacToeModel.OPPONENT) {
-						ticTacToeView.updateView(x, y, ticTacToeModel.getOpponentChar());
-//						ticTacToeView.lockButtons();
-					} else {
-						ticTacToeView.updateView(x, y, ticTacToeModel.getMyChar());
-						ticTacToeView.unlockButtons();
-					}
+				if (ticTacToeModel.isValidMove(Integer.parseInt(move))) {
 					clientController.getModel().doMove(move);
 					ticTacToeModel.makeMove(Integer.parseInt(move));
-				
+						int x = Integer.parseInt(move) / TicTacToeController.AMOUNT_OF_ROWS_AND_COLUMNS;
+						int y = Integer.parseInt(move) % TicTacToeController.AMOUNT_OF_ROWS_AND_COLUMNS;
+						if (ticTacToeModel.getSide() == TicTacToeModel.OPPONENT) {
+							ticTacToeView.updateView(x, y, ticTacToeModel.getMyChar());
+	//						ticTacToeView.lockButtons();
+						} else {
+							ticTacToeView.updateView(x, y, ticTacToeModel.getOpponentChar());
+	//						ticTacToeView.unlockButtons();
+						}
+				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
