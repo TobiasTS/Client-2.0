@@ -1,11 +1,14 @@
 package Views;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import Main.ClientController;
 
@@ -20,7 +23,7 @@ public class ClientView extends JFrame {
 	
 	private LoginView loginView;
 	private LobbyView lobbyView;
-	
+	private ArrayList<JPanel> listViews = new ArrayList<>();
 	private int currentScreen = NOSCREEN;
 	
 	private JMenuBar menuBar;
@@ -32,6 +35,7 @@ public class ClientView extends JFrame {
 		
 		loginView = new LoginView();
 		loginView.setActionListener(controller);
+		registerView(loginView);
 		
 		createMenuBar();
 		setJMenuBar(menuBar);
@@ -43,7 +47,7 @@ public class ClientView extends JFrame {
 		pack();
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        //setBounds(0,0,screenSize.width /4, screenSize.height /4); 									//Size
+        setBounds(0,0,screenSize.width /4, screenSize.height /4); 									//Size
         setLocation(screenSize.width/2-getSize().width/2, screenSize.height/2-getSize().height/2); 	//Location
 	}
 	
@@ -56,6 +60,7 @@ public class ClientView extends JFrame {
 			clearScreen();
 			
 			lobbyView = new LobbyView(controller);
+			registerView(lobbyView);
 			lobbyView.createTable(controller, controller.getModel().getPlayerList());
 
 			add(lobbyView);
@@ -86,6 +91,23 @@ public class ClientView extends JFrame {
 		}
 
 	}
+	
+	public void registerView(JPanel view) {
+ 		listViews.add(view);
+ 	}
+		 	
+ 	public void setView(JPanel view) {
+ 		Iterator<JPanel> iterator = listViews.iterator();
+ 		while (iterator.hasNext()) {
+ 			JPanel next = iterator.next();
+ 			next.setVisible(false);
+ 			remove(next);
+  		}
+ 		view.setVisible(true);
+ 		add(view);
+ 		invalidate();
+ 		validate();
+  	}
 	
 	private void createMenuBar(){
 		menuBar = new JMenuBar();

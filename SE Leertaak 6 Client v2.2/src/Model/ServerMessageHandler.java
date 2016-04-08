@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import Main.ClientController;
@@ -35,7 +36,7 @@ public class ServerMessageHandler {
 			}
 		}
 		else if(message.equals(messageOk)) {
-			if(!controller.getModel().getLoggedIn()) {
+			if(!controller.getModel().isLoggedIn()) {
 				controller.getModel().changeLoggedIn();
 				try {
 					controller.getModel().getPlayerListCommand();
@@ -51,11 +52,16 @@ public class ServerMessageHandler {
 		}
 		else if(message.contains(messageMatch)) {
 			System.out.println("MATCH");
+			controller.getModel().setMatch(message);
+			controller.createMatchController();
 		}
 		else if(message.contains(messageYourTurn)) {
 			System.out.println("YOURTURN");
+			
 		}
 		else if(message.contains(messageMove)) {
+			String move = messageMove + " " + controller.getModel().parseMove(message);
+			controller.getMatchController().getGameController().actionPerformed(new ActionEvent(this, 0, move));
 			System.out.println("MOVE");
 		}
 		else if(message.contains(messageResult)) {

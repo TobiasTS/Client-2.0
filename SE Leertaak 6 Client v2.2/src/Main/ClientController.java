@@ -20,6 +20,7 @@ public class ClientController implements ActionListener {
 	public static final int STATUS_READY = 1;
 	public static final int STATUS_WAITING = 2;
 	
+	private MatchController matchController;
 	private ClientModel model;
 	private ClientView view;
 	
@@ -104,15 +105,31 @@ public class ClientController implements ActionListener {
 		return view;
 	}
 	
+	/*
+	 * Constructs a controller for challenges 
+	 */
 	public void createChallengeController() {
 		ChallengeController challengeController = new ChallengeController();
 		challengeController.displayChallenge(model.getChallenge());
 		if (challengeController.challengeAccepted()) {
 			try {
 				model.acceptChallenge(model.getChallenge().getChallengeNumber());
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/*
+	 * Constructs a controller for matches
+	 */
+	public void createMatchController() {
+		 matchController = new MatchController();
+		 matchController.startMatch(this);
+	}
+	
+	public MatchController getMatchController(){
+		return matchController;
 	}
 }
