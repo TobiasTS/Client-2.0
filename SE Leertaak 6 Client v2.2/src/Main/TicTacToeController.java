@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 import Model.MatchModel;
+import Model.TicTacToeAI;
 import Model.TicTacToeModel;
 import Views.TicTacToeView;
 
@@ -16,12 +17,16 @@ public class TicTacToeController extends GameController {
 	private ClientController clientController;
 	private TicTacToeView ticTacToeView;
 	private TicTacToeModel ticTacToeModel;
+	private TicTacToeAI ticTacToeAi;
 	
 	public TicTacToeController(ClientController clientController, MatchModel match) {
 		this.clientController = clientController;
 		ticTacToeView = new TicTacToeView(this, AMOUNT_OF_ROWS_AND_COLUMNS);
 		ticTacToeModel = new TicTacToeModel(this, AMOUNT_OF_ROWS_AND_COLUMNS, match);
 		ticTacToeView.lockButtons();
+		if (!clientController.getModel().getHuman()) {
+			ticTacToeAi = new TicTacToeAI();
+		}
 	}
 	
 	public TicTacToeModel getTicTacToeModel() {
@@ -49,14 +54,29 @@ public class TicTacToeController extends GameController {
 					} else {
 						setPlayerMove(x, y, move);
 					}
-					ticTacToeModel.makeMove(Integer.parseInt(move));				
+					ticTacToeModel.makeMove(Integer.parseInt(move));	
+					if (!clientController.getModel().getHuman()) ticTacToeAi.makeMove(Integer.parseInt(move));
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}
 			break;
 		case COMMAND_YOURTURN:
 			ticTacToeModel.changeSide(ticTacToeModel.ME);
-			ticTacToeView.unlockButtons();
+			if (!clientController.getModel().getHuman()) {
+				ticTacToeAi.setComputerPlays();
+				int moveAi = ticTacToeAi.chooseMove();
+				int x = moveAi / TicTacToeController.AMOUNT_OF_ROWS_AND_COLUMNS;
+				int y = moveAi % TicTacToeController.AMOUNT_OF_ROWS_AND_COLUMNS;
+				ticTacToeAi.makeMove(moveAi);
+				try {
+					setPlayerMove(x, y, String.valueOf(moveAi));
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			} else {
+				ticTacToeView.unlockButtons();
+			}
+			break;			
 		}
 	}
 	
@@ -65,6 +85,7 @@ public class TicTacToeController extends GameController {
 		clientController.getModel().doMove(move);
 		ticTacToeView.lockButtons();
 		ticTacToeModel.changeSide(ticTacToeModel.OPPONENT);
+		if (!clientController.getModel().getHuman()) ticTacToeAi.setOpponentPlays();
 	}
 
 }

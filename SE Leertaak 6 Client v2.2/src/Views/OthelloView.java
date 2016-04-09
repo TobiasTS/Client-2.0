@@ -10,9 +10,9 @@ import Main.OthelloController;
 
 public class OthelloView extends JPanel {
 
-	private ImageIcon defaultImage = new ImageIcon(this.getClass().getResource("/images/E.png"));
-	private ImageIcon bImage = new ImageIcon(this.getClass().getResource("/images/B.png"));
-	private ImageIcon wImage = new ImageIcon(this.getClass().getResource("/images/W.png"));
+	private ImageIcon defaultImage = new ImageIcon("images/E.png");
+	private ImageIcon bImage = new ImageIcon("images/B.png");
+	private ImageIcon wImage = new ImageIcon("images/W.png");
 	
 	private static final long serialVersionUID = -7446106282897877074L;
 	private OthelloController othelloController;

@@ -42,7 +42,7 @@ public class TicTacToeView extends JPanel {
 	}
 	
 	public void unlockButtons() {
-		char board[][] = ticTacToeController.getTicTacToeModel().getBoard();
+		int board[][] = ticTacToeController.getTicTacToeModel().getBoard();
 		for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[i].length; j++) {
                 if (board[i][j] == TicTacToeModel.EMPTY) {
@@ -52,7 +52,7 @@ public class TicTacToeView extends JPanel {
 		}
 	}
 	
-	public void updateView(int x, int y, char icon) {
+	public void updateView(int x, int y, int icon) {
 		buttons[x][y].setEnabled(false);
 		buttons[x][y].setIcon(icon);
 		buttons[x][y].repaint();

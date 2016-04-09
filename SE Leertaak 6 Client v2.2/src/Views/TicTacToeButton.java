@@ -12,9 +12,9 @@ import javax.swing.JButton;
 public class TicTacToeButton extends JButton {
 	
 	private static final long serialVersionUID = 1L;
-	private ImageIcon defaultImage = new ImageIcon(this.getClass().getResource("/images/E.png"));
-	private ImageIcon xImage = new ImageIcon(this.getClass().getResource("/images/X.png"));
-	private ImageIcon oImage = new ImageIcon(this.getClass().getResource("/images/O.png"));
+	private ImageIcon defaultImage = new ImageIcon("images/E.png");
+	private ImageIcon xImage = new ImageIcon("images/X.png");
+	private ImageIcon oImage = new ImageIcon("images/O.png");
 	
 	/**
 	 * constructor for a new Tic Tac Toe button.
@@ -30,11 +30,11 @@ public class TicTacToeButton extends JButton {
 	 * 
 	 * @param type int indicating X or O.
 	 */
-	public void setIcon(char icon) {
-		if(icon == 'X') {
+	public void setIcon(int icon) {
+		if(icon == 1) {
 			setIcon(xImage);
 		}
-		else if(icon == 'O') {
+		else if(icon == 0) {
 			setIcon(oImage);
 		}
 		setEnabled(false);
