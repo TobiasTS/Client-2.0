@@ -68,8 +68,6 @@ public class ClientSocket {
 	 */
 	public String clientLogin(String name) throws IOException {
 		writeToServer("login " + name);
-		controller.getModel().setMessageChecked(false);
-		while(!controller.getModel().getMessageChecked()) {}
 		return name;
 	}
 

@@ -100,6 +100,5 @@ public class ServerMessageHandler {
 		else {
 			System.out.println("HANDLED MESSAGE: DEFAULT");
 		}
-		controller.getModel().setMessageChecked(true);
 	}
 }

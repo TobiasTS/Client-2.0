@@ -20,7 +20,6 @@ public class ClientModel {
 	private String clientName = "";
 	
 	private ClientSocket clientSocket;
-	private boolean messageChecked;
 	
 	private boolean human;
 	
@@ -160,24 +159,6 @@ public class ClientModel {
 	 */
 	public String getClientName() {
 		return clientName;
-	}
-	
-	/**
-	 * Method to set the boolean for message checked to the input value.
-	 * 
-	 * @param value boolean the value for message checked.
-	 */
-	public void setMessageChecked(boolean value) {
-		messageChecked = value;
-	}
-	
-	/**
-	 * Getter for the message checked boolean.
-	 * 
-	 * @return boolean if the message is checked.
-	 */
-	public boolean getMessageChecked() {
-		return messageChecked;
 	}
 	
 	/**

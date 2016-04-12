@@ -53,6 +53,7 @@ public class OthelloController extends GameController {
 			String move = e.getActionCommand().split(" ")[1];		
 			try {
 				othelloModel.doPlayerMove(othelloModel.getCurrentPlayer(), move);
+				clientController.getModel().doMove(move);
 				othelloView.updateView(othelloModel.getBoard());
 				clientController.getModel().doMove(move);
 			} catch (IOException e1) {
