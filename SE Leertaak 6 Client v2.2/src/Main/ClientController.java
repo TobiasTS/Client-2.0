@@ -82,7 +82,8 @@ public class ClientController implements ActionListener {
 			break;
 		case COMMAND_CHALLENGE:
 				String game = null;
-				String player = e.getActionCommand().split(" ")[1];
+//				String player = e.getActionCommand().split(" ")[1];
+				String player = e.getActionCommand().substring(9);
 				ChallengeView challengeView = new ChallengeView(player, model.getGameList());
 				status = STATUS_WAITING;
 				while (status == STATUS_WAITING) {
