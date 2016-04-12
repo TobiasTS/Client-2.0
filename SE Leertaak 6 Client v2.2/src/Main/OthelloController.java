@@ -60,6 +60,7 @@ public class OthelloController extends GameController {
 			}
 			break;
 		case COMMAND_YOURTURN:
+			othelloView.updateView(othelloModel.getBoard());
 			othelloView.unlockButtons();
 			break;
 		}
