@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Main.OthelloController;
+import Model.TicTacToeModel;
 
 public class OthelloView extends JPanel {
 
@@ -36,13 +37,39 @@ public class OthelloView extends JPanel {
             }
 		}
 	}
-
-	public void updateView(char[][] board) {
+	
+	public void lockButtons() {
+		for(int i = 0; i < buttons.length; i++) {
+            for(int j = 0; j < buttons[i].length; j++) {
+            	buttons[i][j].setEnabled(false);
+            }
+		}
+	}
+	
+	public void unlockButtons() {
+		int board[][] = othelloController.getOthelloModel().getBoard();
 		for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board[i].length; j++) {
-            	if (board[i][j] == othelloController.getOthelloModel().BLACK) {
+                if (board[i][j] == TicTacToeModel.EMPTY) {
+                	buttons[i][j].setEnabled(true);
+                }
+            }
+		}
+	}
+	
+	public void updateView(int x, int y, int icon) {
+		buttons[x][y].setEnabled(false);
+		if (icon == 1) buttons[x][y].setIcon(bImage);
+		else buttons[x][y].setIcon(wImage);		
+		buttons[x][y].repaint();
+	}
+
+	public void updateView(int[][] board) {
+		for(int i = 0; i < board.length; i++) {
+            for(int j = 0; j < board[i].length; j++) {
+            	if (board[i][j] == 1) {
             		buttons[i][j].setIcon(bImage);
-            	} else if (board[i][j] == othelloController.getOthelloModel().WHITE) {
+            	} else if (board[i][j] == 0) {
             		buttons[i][j].setIcon(wImage);
             	}
             }

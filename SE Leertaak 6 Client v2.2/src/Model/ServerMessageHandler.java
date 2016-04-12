@@ -75,6 +75,7 @@ public class ServerMessageHandler {
 				e.printStackTrace();
 			}
 			controller.getView().setLobbyScreen();
+			
 		}
 		else if(message.contains(MESSAGE_CHALLENGE)) {
 			System.out.println("HANDLED MESSAGE: CHALLENGE");
