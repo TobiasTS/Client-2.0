@@ -3,6 +3,8 @@ package Model;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import Main.ClientController;
 
 public class ServerMessageHandler {
@@ -71,6 +73,20 @@ public class ServerMessageHandler {
 			System.out.println("HANDLED MESSAGE: RESULT");
 			try {
 				controller.getModel().getPlayerListCommand();
+				if(message.contains("WIN"))
+					JOptionPane.showMessageDialog(
+		               controller.getView(),
+		                "You won!");
+				else if(message.contains("LOSS"))
+					JOptionPane.showMessageDialog(
+		               controller.getView(),
+		                "You lost!");
+				else
+					if(message.contains("DRAW"))
+						JOptionPane.showMessageDialog(
+			               controller.getView(),
+			                "Draw!");
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

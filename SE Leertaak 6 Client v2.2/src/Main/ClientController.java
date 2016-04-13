@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Model.ClientModel;
 import Views.ChallengeView;
 import Views.ClientView;
+import Views.forfeitView;
 
 public class ClientController implements ActionListener {
 	
@@ -19,6 +20,7 @@ public class ClientController implements ActionListener {
 	public static final String COMMAND_CHALLENGE = "CHALLENGE";
 	public static final String COMMAND_SUBSCRIBE = "SUBSCRIBE";
 	public static final String COMMAND_UNSUBSCRIBE = "UNSUBSCRIBE";
+	public static final String COMMAND_FORFEIT = "FORFEIT";
 	
 	public static final String GAME_TIC_TAC_TOE = "Tic-tac-toe";
 	public static final String GAME_OTHELLO = "Reversi";
@@ -130,6 +132,18 @@ public class ClientController implements ActionListener {
 				model.unsubscribeClient();
 			} catch (IOException ex) {
 				ex.printStackTrace();
+			}
+			break;
+		case COMMAND_FORFEIT:
+			forfeitView forfeitView = new forfeitView();
+			status = STATUS_WAITING;
+			while (status == STATUS_WAITING && forfeitView.getChoice() != 1) {
+					status = STATUS_READY;
+					try {
+						model.forfeitClient();
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
 			}
 			break;
 		}
