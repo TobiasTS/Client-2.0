@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Model.ClientModel;
 import Views.ChallengeView;
 import Views.ClientView;
+import Views.forfeitView;
 
 public class ClientController implements ActionListener {
 	
@@ -134,10 +135,15 @@ public class ClientController implements ActionListener {
 			}
 			break;
 		case COMMAND_FORFEIT:
-			try {
-				model.forfeitClient();
-			} catch (IOException ex) {
-				ex.printStackTrace();
+			forfeitView forfeitView = new forfeitView();
+			status = STATUS_WAITING;
+			while (status == STATUS_WAITING && forfeitView.getChoice() != 1) {
+					status = STATUS_READY;
+					try {
+						model.forfeitClient();
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
 			}
 			break;
 		}
