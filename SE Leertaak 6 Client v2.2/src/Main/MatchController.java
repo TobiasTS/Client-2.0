@@ -3,6 +3,7 @@ package Main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Views.MatchView;
@@ -27,6 +28,12 @@ public class MatchController {
 	public void startMatch(ClientController clientController) {
 		String gameType = clientController.getModel().getMatch().getGameType();
 		MatchView matchView = new MatchView(gameType, clientController.getModel().getMatch().getOpponent());
+		
+		JButton forfeitButton = new JButton("Forfeit");
+		forfeitButton.addActionListener(clientController);
+		forfeitButton.setActionCommand(ClientController.COMMAND_FORFEIT);
+		matchView.add(forfeitButton);
+		
 		if (gameType.contains(GAME_TIC_TAC_TOE)) {
 			gameController = new TicTacToeController(clientController, clientController.getModel().getMatch());
 			panelGame.add(((TicTacToeController) gameController).getTicTacToeView(), createConstraints(false));

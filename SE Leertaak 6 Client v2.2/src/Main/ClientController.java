@@ -19,6 +19,7 @@ public class ClientController implements ActionListener {
 	public static final String COMMAND_CHALLENGE = "CHALLENGE";
 	public static final String COMMAND_SUBSCRIBE = "SUBSCRIBE";
 	public static final String COMMAND_UNSUBSCRIBE = "UNSUBSCRIBE";
+	public static final String COMMAND_FORFEIT = "FORFEIT";
 	
 	public static final String GAME_TIC_TAC_TOE = "Tic-tac-toe";
 	public static final String GAME_OTHELLO = "Reversi";
@@ -128,6 +129,13 @@ public class ClientController implements ActionListener {
 		case COMMAND_UNSUBSCRIBE:
 			try {
 				model.unsubscribeClient();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+			break;
+		case COMMAND_FORFEIT:
+			try {
+				model.forfeitClient();
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			}

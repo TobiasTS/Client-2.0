@@ -263,6 +263,13 @@ public class ClientModel {
 	public ChallengeModel getChallenge() {
 		return challengeModel;
 	}
+	/**
+	 * forfeits a game
+	 * @throws IOException
+	 */
+	public void forfeitClient() throws IOException {
+		clientSocket.writeToServer("forfeit");
+	}
 	
 	/**
 	 * Setter for the challengeModel.
