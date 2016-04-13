@@ -35,7 +35,6 @@ public class ClientView extends JFrame {
 		lobbyView = new LobbyView(controller);
 		registerView(lobbyView);
 
-		
 		createMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -93,7 +92,7 @@ public class ClientView extends JFrame {
  		validate();
   	}
 	
-	private void createMenuBar(){
+	private void createMenuBar() {
 		menuBar = new JMenuBar();
 		//File menu
 		menuFile = new JMenu("Actions");
@@ -114,9 +113,27 @@ public class ClientView extends JFrame {
 		
 		menuFile.add(itemPlayerList);
 		menuFile.add(itemGameList);
+		menuFile.add(createSubscribeMenu());
 		menuFile.addSeparator();
 		menuFile.add(itemLogout);
 		
 		menuBar.add(menuFile);
+	}
+
+	private JMenu createSubscribeMenu() {
+		JMenu menuSubscribe = new JMenu("Subscribe");
+		ArrayList<String> games = new ArrayList<>();
+		games.add(ClientController.GAME_TIC_TAC_TOE);
+		games.add(ClientController.GAME_OTHELLO);
+		Iterator<String> it = games.iterator();
+		while (it.hasNext()) {
+			String next = it.next();
+			JMenuItem itemGame = new JMenuItem(next);
+			itemGame.setActionCommand(ClientController.COMMAND_SUBSCRIBE + " " + next);
+			itemGame.addActionListener(controller);
+			menuSubscribe.add(itemGame);
+		}
+		
+		return menuSubscribe;
 	}
 }

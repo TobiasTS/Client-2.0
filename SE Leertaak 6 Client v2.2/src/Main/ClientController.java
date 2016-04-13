@@ -20,8 +20,8 @@ public class ClientController implements ActionListener {
 	public static final String COMMAND_SUBSCRIBE = "SUBSCRIBE";
 	public static final String COMMAND_UNSUBSCRIBE = "UNSUBSCRIBE";
 	
-	public static final String GAME_TIC_TAC_TOE = "Tic Tac Toe v1.4";
-	public static final String GAME_OTHELLO = "Othello v1.1";
+	public static final String GAME_TIC_TAC_TOE = "Tic-tac-toe";
+	public static final String GAME_OTHELLO = "Reversi";
 	
 	public static final int STATUS_READY = 1;
 	public static final int STATUS_WAITING = 2;
