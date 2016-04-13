@@ -19,7 +19,6 @@ public class LobbyView extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private ClientController controller;
 	private RecordModel model;
-	public boolean hasView = false;
 	
 	public LobbyView(ClientController controller) {
 		super(new FlowLayout());
@@ -33,6 +32,9 @@ public class LobbyView extends JPanel implements ActionListener {
 		while (iterator.hasNext()) {
 			model.addRecord(new Record(iterator.next(), controller));
 		}
+		if(this.getComponentCount() != 0) {
+			this.remove(this.getComponent(0));
+		}
         JTable table = new JTable(model);
 		EditorAndRenderer editorAndRenderer = new EditorAndRenderer();
 		table.setRowHeight(38);
@@ -41,7 +43,6 @@ public class LobbyView extends JPanel implements ActionListener {
 		table.setPreferredScrollableViewportSize(new Dimension(600, 400));
 		table.setFillsViewportHeight(true);
 		add(new JScrollPane(table));
-		hasView = true;
 	}
 	
 	public void updateTable(String player){

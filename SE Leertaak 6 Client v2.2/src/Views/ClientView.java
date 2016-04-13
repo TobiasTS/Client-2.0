@@ -61,9 +61,8 @@ public class ClientView extends JFrame {
 	}
 	
 	public void createLobby() {
-		if(!lobbyView.hasView) {
-			lobbyView.createTable(controller, controller.getModel().getPlayerList());
-		}
+		lobbyView.createTable(controller, controller.getModel().getPlayerList());
+		
 	}
 	
 	public void setLoginScreen() {
