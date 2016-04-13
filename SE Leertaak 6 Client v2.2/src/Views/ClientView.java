@@ -1,7 +1,6 @@
 package Views;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -15,17 +14,12 @@ import Main.ClientController;
 
 public class ClientView extends JFrame {
 	
-	private static final int NOSCREEN = 0;
-	private static final int LOGINSCREEN = 1;
-	private static final int LOBBYSCREEN = 2;
-
 	private static final long serialVersionUID = 1L;
 	private ClientController controller;
 	
 	private LoginView loginView;
 	private LobbyView lobbyView;
 	private ArrayList<JPanel> listViews = new ArrayList<>();
-	private int currentScreen = NOSCREEN;
 	
 	private JMenuBar menuBar;
 	private JMenu menuFile;
@@ -38,10 +32,14 @@ public class ClientView extends JFrame {
 		loginView.setActionListener(controller);
 		registerView(loginView);
 		
+		lobbyView = new LobbyView(controller);
+		registerView(lobbyView);
+
+		
 		createMenuBar();
 		setJMenuBar(menuBar);
 		
-		add(loginView);
+		setView(loginView);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setName("Client v2.2");
 		setVisible(true);
@@ -57,44 +55,24 @@ public class ClientView extends JFrame {
 	}
 	
 	public void setLobbyScreen() {
-		if(currentScreen != LOBBYSCREEN) {
-			clearScreen();
-			
-			lobbyView = new LobbyView(controller);
-			registerView(lobbyView);
-			lobbyView.createTable(controller, controller.getModel().getPlayerList());
+		createLobby();
+		menuFile.setEnabled(true);
 
-			add(lobbyView);
-			lobbyView.setVisible(true);
-			
-			menuFile.setEnabled(true);
-			
-			pack();
-		}
+		setView(lobbyView);
 	}
 	
-	public void clearScreen() {
-		if(lobbyView != null) {
-			remove(lobbyView);
-			lobbyView.setVisible(false);
+	public void createLobby() {
+		if(!lobbyView.hasView) {
+			lobbyView.createTable(controller, controller.getModel().getPlayerList());
 		}
-		remove(loginView);
-		loginView.setVisible(false);
 	}
 	
 	public void setLoginScreen() {
-		if(currentScreen != LOGINSCREEN) {
-			clearScreen();
-			add(loginView);
-			loginView.setVisible(true);
-			pack();
-			currentScreen = LOGINSCREEN;
-		}
+		menuFile.setEnabled(false);
 
-	}
-	
-	public void setLobbyView() {
-		setView(lobbyView);
+		setView(loginView);
+		
+
 	}
 	
 	public void registerView(JPanel view) {
@@ -108,15 +86,16 @@ public class ClientView extends JFrame {
  			next.setVisible(false);
  			remove(next);
   		}
- 		view.setVisible(true);
+        view.setVisible(true);
  		add(view);
+ 		this.pack();
  		invalidate();
  		validate();
   	}
 	
 	private void createMenuBar(){
 		menuBar = new JMenuBar();
-		//Actions menu
+		//File menu
 		menuFile = new JMenu("Actions");
 		menuFile.setEnabled(false);
 		//Player list item
@@ -127,6 +106,7 @@ public class ClientView extends JFrame {
 		JMenuItem itemGameList = new JMenuItem("Update game list");
 		itemGameList.setActionCommand(ClientController.COMMAND_GET_GAME_LIST);
 		itemGameList.addActionListener(controller);
+		
 		//Log out menu item
 		JMenuItem itemLogout = new JMenuItem("Log out");
 		itemLogout.setActionCommand(ClientController.COMMAND_LOGOUT);
@@ -134,24 +114,9 @@ public class ClientView extends JFrame {
 		
 		menuFile.add(itemPlayerList);
 		menuFile.add(itemGameList);
-		menuFile.add(createSubscribeMenu());
 		menuFile.addSeparator();
 		menuFile.add(itemLogout);
 		
 		menuBar.add(menuFile);
-	}
-	
-	private JMenu createSubscribeMenu() {
-		JMenu menuSubscribe = new JMenu("Subscribe");
-		Iterator<String> it = controller.getGames().iterator();
-		while (it.hasNext()) {
-			String next = it.next();
-			JMenuItem itemGame = new JMenuItem(next);
-			itemGame.setActionCommand(ClientController.COMMAND_SUBSCRIBE + " " + next);
-			itemGame.addActionListener(controller);
-			menuSubscribe.add(itemGame);
-		}
-		
-		return menuSubscribe;
 	}
 }
