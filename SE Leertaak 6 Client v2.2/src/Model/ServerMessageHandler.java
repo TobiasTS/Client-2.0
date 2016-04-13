@@ -32,7 +32,8 @@ public class ServerMessageHandler {
 		try{
 			
 			//if(message.split(" ")[4].equals("MESSAGE:")){
-			if(message.substring(message.indexOf(",")).contains(" MESSAGE: ")){		
+			if(message.substring(message.indexOf(",")).contains(" MESSAGE: ") && controller.chatEnabled
+					){		
 				//playername 
 				String playername = message.split("\"")[1];
 				
