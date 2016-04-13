@@ -31,7 +31,8 @@ public class ServerMessageHandler {
 	public void handleMessage(String message) {
 		try{
 			
-			if(message.split(" ")[4].equals("MESSAGE:")){			
+			//if(message.split(" ")[4].equals("MESSAGE:")){
+			if(message.substring(message.indexOf(",")).contains(" MESSAGE: ")){		
 				//playername 
 				String playername = message.split("\"")[1];
 				
@@ -48,9 +49,9 @@ public class ServerMessageHandler {
 				System.out.println("HANDLED MESSAGE: MESSAGE");
 				return;
 			}
-		}catch(ArrayIndexOutOfBoundsException e){
-			
 		}
+		catch(ArrayIndexOutOfBoundsException e){}
+		catch(StringIndexOutOfBoundsException e){}
 		
 		if(message.equals(MESSAGE_LOGIN_ERROR)) {
 			System.out.println("HANDLED MESSAGE: ERROR LOGIN");
