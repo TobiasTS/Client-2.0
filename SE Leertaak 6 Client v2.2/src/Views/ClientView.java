@@ -125,17 +125,28 @@ public class ClientView extends JFrame {
 		//File menu
 		menuFile2 = new JMenu("Options");
 		menuFile2.setEnabled(false);
-		//Player list item
-		JMenuItem disableMessage = new JMenuItem("Disable Message");
+		//disable messages
+		JMenuItem disableMessage = new JMenuItem("Disable messages");
 		disableMessage.setActionCommand(ClientController.COMMAND_DISABLE_MESSAGE);
 		disableMessage.addActionListener(controller);
-		//Game list item
-		JMenuItem enableMessage = new JMenuItem("Enable Message");
+		//enable messages
+		JMenuItem enableMessage = new JMenuItem("Enable messages");
 		enableMessage.setActionCommand(ClientController.COMMAND_ENABLE_MESSAGE);
 		enableMessage.addActionListener(controller);
+		//disable messages
+		JMenuItem disableChallenges = new JMenuItem("Disable challenges");
+		disableChallenges.setActionCommand(ClientController.COMMAND_DISABLE_CHALLENGES);
+		disableChallenges.addActionListener(controller);
+		//enable messages
+		JMenuItem enableChallenges = new JMenuItem("Enable challenges");
+		enableChallenges.setActionCommand(ClientController.COMMAND_ENABLE_CHALLENGES);
+		enableChallenges.addActionListener(controller);
 				
 		menuFile2.add(disableMessage);
 		menuFile2.add(enableMessage);
+		menuFile2.addSeparator();
+		menuFile2.add(disableChallenges);
+		menuFile2.add(enableChallenges);
 		
 		menuBar.add(menuFile2);
 	}

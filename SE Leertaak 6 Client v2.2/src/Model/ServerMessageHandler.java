@@ -123,7 +123,7 @@ public class ServerMessageHandler {
 		}
 		else if(message.contains(MESSAGE_CHALLENGE)) {
 			System.out.println("HANDLED MESSAGE: CHALLENGE");
-			if(!controller.inAMatch) {
+			if(!controller.inAMatch && controller.challengeEnabled) {
 				controller.getModel().setChallenge(message);
 				controller.createChallengeController();
 				System.out.print("HANDLED MESSAGE: CHALLENGE ACCEPTED");

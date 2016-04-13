@@ -25,6 +25,9 @@ public class ClientController implements ActionListener {
 	public static final String COMMAND_MESSAGE = "MESSAGE";
 	public static final String COMMAND_ENABLE_MESSAGE = "ENABLEMESSAGE";
 	public static final String COMMAND_DISABLE_MESSAGE = "DISABLEMESSAGE";
+	public static final String COMMAND_ENABLE_CHALLENGES = "ENABLECHALLENGES";
+	public static final String COMMAND_DISABLE_CHALLENGES = "DISABLECHALLENGES";
+	
 	
 	public static final String GAME_TIC_TAC_TOE = "Tic-tac-toe";
 	public static final String GAME_OTHELLO = "Reversi";
@@ -41,6 +44,7 @@ public class ClientController implements ActionListener {
 	
 	public boolean inAMatch = false;
 	public boolean chatEnabled = true;
+	public boolean challengeEnabled = true;
 	
 	public ClientController() {
 		model = new ClientModel(this);
@@ -167,6 +171,12 @@ public class ClientController implements ActionListener {
 		case COMMAND_DISABLE_MESSAGE:
 				chatEnabled = false;
 			break;
+		case COMMAND_ENABLE_CHALLENGES:
+			challengeEnabled = true;
+		break;
+		case COMMAND_DISABLE_CHALLENGES:
+			challengeEnabled = false;
+		break;
 		}
 	}
 
