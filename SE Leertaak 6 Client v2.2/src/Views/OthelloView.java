@@ -39,9 +39,12 @@ public class OthelloView extends JPanel {
 	}
 	
 	public void lockButtons() {
-		for(int i = 0; i < buttons.length; i++) {
-            for(int j = 0; j < buttons[i].length; j++) {
-            	buttons[i][j].setEnabled(false);
+		int board[][] = othelloController.getOthelloModel().getBoard();
+		for(int i = 0; i < board.length; i++) {
+            for(int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == TicTacToeModel.EMPTY) {
+                	buttons[i][j].setEnabled(false);
+                }
             }
 		}
 	}

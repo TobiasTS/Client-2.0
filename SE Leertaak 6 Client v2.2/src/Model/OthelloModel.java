@@ -55,6 +55,7 @@ public class OthelloModel extends AbstractGameModule {
 		return board;
 	}
 	
+
 	/**
 	 * Is called when a new game starts.
 	 * Decides which player goes first.
@@ -150,7 +151,7 @@ public class OthelloModel extends AbstractGameModule {
 			moveDetails = "Next move";
 			//moveDetails += '\n';
 			//moveDetails += boardToString();
-//			nextPlayer();
+			nextPlayer();
 			if(!getPlayableMoves()){
 				moveDetails =  getPlayerToMove() + " has no available moves!" ;
 				nextPlayer();
@@ -381,7 +382,7 @@ public class OthelloModel extends AbstractGameModule {
 	/**
 	 * Sets the next player to the other player.
 	 */
-	private void nextPlayer() {
+	public void nextPlayer() {
 		nextPlayer = otherPlayer(nextPlayer);
 	}
 	

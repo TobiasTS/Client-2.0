@@ -15,7 +15,7 @@ import Main.ClientController;
  */
 public class ClientSocket {
 	
-	private static final String IPADDRESS = "hanzegameserver.nl";
+	private static final String IPADDRESS = "127.0.0.1";
 	private static final int PORTNUMBER = 7789;
 	private Socket socket;
 	
