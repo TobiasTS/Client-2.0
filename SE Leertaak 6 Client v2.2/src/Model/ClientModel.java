@@ -82,7 +82,7 @@ public class ClientModel {
 	 * @throws IOException signals that an I/O exception of some sort has occurred.
 	 */
 	public void subscribeClient(String gameName) throws IOException {
-		clientSocket.writeToServer("subscribe " + gameName);
+		clientSocket.writeToServer("subscribe " +  gameName);
 	}
 	
 	/**
@@ -285,7 +285,6 @@ public class ClientModel {
 		int index = 0;
 		String challenger = null, challengerNumber = null, gameType = null;
 		while (matcher.find()) {
-		  System.out.println();
 		  switch(index){
 		  	case 0:
 			  	challenger = matcher.group(1);
@@ -332,7 +331,6 @@ public class ClientModel {
  		int index = 0;
  		String playerToMove = null, gameType = null,  opponent = null;
  		while (matcher.find()) {
- 		  System.out.println();
  		  switch(index){
  		  	case 0:
  	  		playerToMove = matcher.group(1);
@@ -360,7 +358,6 @@ public class ClientModel {
  		Matcher matcher = pattern.matcher(input);
  		int index = 0;
  		while (matcher.find()) {
- 		  System.out.println();
  		  switch(index){
  		  case 1:
  			  return matcher.group(1);

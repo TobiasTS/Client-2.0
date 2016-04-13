@@ -61,10 +61,9 @@ public class ServerMessageHandler {
 		}
 		else if(message.contains(MESSAGE_MOVE)) {
 			if(!message.contains(controller.getModel().getClientName())) {
+				System.out.println("HANDLED MESSAGE: MOVE");
 				String move = "MOVE" + " " + controller.getModel().parseMove(message);
 				controller.getMatchController().getGameController().actionPerformed(new ActionEvent(this, 0, move));
-				
-				System.out.println("HANDLED MESSAGE: MOVE");
 			}
 		}
 		else if(message.contains(MESSAGE_RESULT)) {

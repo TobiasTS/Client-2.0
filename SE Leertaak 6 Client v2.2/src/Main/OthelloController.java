@@ -22,7 +22,6 @@ public class OthelloController extends GameController {
 	
 	public OthelloController(ClientController clientController, MatchModel match) {
 		this.clientController = clientController;
-//		othelloModel = new OthelloModel(AMOUNT_OF_ROWS_AND_COLUMNS, match);
 		if (match.getPlayerToMove().equals(clientController.getModel().getClientName())){
 			playerOne = clientController.getModel().getClientName();
 			playerTwo = match.getOpponent();
@@ -33,6 +32,7 @@ public class OthelloController extends GameController {
 		othelloModel = new OthelloModel(playerOne, playerTwo);
 		othelloView = new OthelloView(this, AMOUNT_OF_ROWS_AND_COLUMNS);
 		othelloView.updateView(othelloModel.getBoard());
+//		othelloView.lockButtons();
 	}
 
 	public OthelloModel getOthelloModel() {
@@ -52,12 +52,18 @@ public class OthelloController extends GameController {
 		case COMMAND_MOVE:
 			String move = e.getActionCommand().split(" ")[1];		
 			try {
+				if (clientController.getModel().getClientName().equals(othelloModel.getCurrentPlayer())) {
+					clientController.getModel().doMove(move);
+					othelloView.updateView(othelloModel.getBoard());
+//					othelloView.lockButtons();
+				} else {
+					
+					othelloView.updateView(othelloModel.getBoard());
+				}
 				othelloModel.doPlayerMove(othelloModel.getCurrentPlayer(), move);
-				clientController.getModel().doMove(move);
-				othelloView.updateView(othelloModel.getBoard());
-				clientController.getModel().doMove(move);
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				
+			} catch (IOException | IllegalStateException ex) {
+				ex.printStackTrace();
 			}
 			break;
 		case COMMAND_YOURTURN:

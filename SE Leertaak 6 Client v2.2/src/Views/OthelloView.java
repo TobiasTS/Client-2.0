@@ -69,8 +69,10 @@ public class OthelloView extends JPanel {
             for(int j = 0; j < board[i].length; j++) {
             	if (board[i][j] == 1) {
             		buttons[i][j].setIcon(bImage);
+            		buttons[i][j].repaint();
             	} else if (board[i][j] == 0) {
             		buttons[i][j].setIcon(wImage);
+            		buttons[i][j].repaint();
             	}
             }
 		}

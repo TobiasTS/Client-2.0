@@ -150,7 +150,7 @@ public class OthelloModel extends AbstractGameModule {
 			moveDetails = "Next move";
 			//moveDetails += '\n';
 			//moveDetails += boardToString();
-			nextPlayer();
+//			nextPlayer();
 			if(!getPlayableMoves()){
 				moveDetails =  getPlayerToMove() + " has no available moves!" ;
 				nextPlayer();

@@ -1,7 +1,5 @@
 package Main;
 
-import Model.ClientModel;
-
 /**
  * The main that starts the application.
  * 
@@ -10,8 +8,6 @@ import Model.ClientModel;
  * @version 1.0
  */
 public class ClientMVC {
-	private static ClientController controller;
-	private static ClientModel model;
 
 	/**
 	 * Creates the controller and model for the application.
@@ -20,8 +16,6 @@ public class ClientMVC {
 	 * @param args String[] generated from Java.
 	 */
 	public static void main(String[] args) {
-		controller = new ClientController();
-		model = new ClientModel(controller);
-		controller.setModel(model);
+		ClientController controller = new ClientController();
 	}
 }

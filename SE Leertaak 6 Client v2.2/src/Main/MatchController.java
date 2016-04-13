@@ -9,8 +9,8 @@ import Views.MatchView;
 
 public class MatchController {
 	
-	private static final String GAME_TIC_TAC_TOE = "Tic-tac-toe";
-	private static final String GAME_OTHELLO = "Reversi";
+	private static final String GAME_TIC_TAC_TOE = ClientController.GAME_TIC_TAC_TOE;
+	private static final String GAME_OTHELLO = ClientController.GAME_OTHELLO;
 	
 	private GameController gameController;
 	private JPanel panelGame;

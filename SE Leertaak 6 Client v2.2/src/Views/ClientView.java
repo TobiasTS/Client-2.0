@@ -1,6 +1,7 @@
 package Views;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -92,6 +93,10 @@ public class ClientView extends JFrame {
 
 	}
 	
+	public void setLobbyView() {
+		setView(lobbyView);
+	}
+	
 	public void registerView(JPanel view) {
  		listViews.add(view);
  	}
@@ -111,7 +116,7 @@ public class ClientView extends JFrame {
 	
 	private void createMenuBar(){
 		menuBar = new JMenuBar();
-		//File menu
+		//Actions menu
 		menuFile = new JMenu("Actions");
 		menuFile.setEnabled(false);
 		//Player list item
@@ -122,7 +127,6 @@ public class ClientView extends JFrame {
 		JMenuItem itemGameList = new JMenuItem("Update game list");
 		itemGameList.setActionCommand(ClientController.COMMAND_GET_GAME_LIST);
 		itemGameList.addActionListener(controller);
-		
 		//Log out menu item
 		JMenuItem itemLogout = new JMenuItem("Log out");
 		itemLogout.setActionCommand(ClientController.COMMAND_LOGOUT);
@@ -130,9 +134,24 @@ public class ClientView extends JFrame {
 		
 		menuFile.add(itemPlayerList);
 		menuFile.add(itemGameList);
+		menuFile.add(createSubscribeMenu());
 		menuFile.addSeparator();
 		menuFile.add(itemLogout);
 		
 		menuBar.add(menuFile);
+	}
+	
+	private JMenu createSubscribeMenu() {
+		JMenu menuSubscribe = new JMenu("Subscribe");
+		Iterator<String> it = controller.getGames().iterator();
+		while (it.hasNext()) {
+			String next = it.next();
+			JMenuItem itemGame = new JMenuItem(next);
+			itemGame.setActionCommand(ClientController.COMMAND_SUBSCRIBE + " " + next);
+			itemGame.addActionListener(controller);
+			menuSubscribe.add(itemGame);
+		}
+		
+		return menuSubscribe;
 	}
 }
