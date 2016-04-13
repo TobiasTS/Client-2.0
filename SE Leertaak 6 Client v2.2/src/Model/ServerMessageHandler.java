@@ -32,8 +32,8 @@ public class ServerMessageHandler {
 		try{
 			
 			//if(message.split(" ")[4].equals("MESSAGE:")){
-			if(message.substring(message.indexOf(",")).contains(" MESSAGE: ") && controller.chatEnabled
-					){		
+			if(message.substring(message.indexOf(",")).contains(" MESSAGE: ") 
+					&& controller.chatEnabled){		
 				//playername 
 				String playername = message.split("\"")[1];
 				
@@ -42,7 +42,7 @@ public class ServerMessageHandler {
 				
 				String reply = JOptionPane.showInputDialog(
 			               controller.getView(),
-			                playername + ": "+ bericht + ". \nWrite a reply:");
+			                playername + ":\n\n"+ bericht + "\n\nWrite a reply:");
 				
 				if(reply != null)
 					controller.getModel().chat(playername, reply);
