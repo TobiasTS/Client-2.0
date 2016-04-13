@@ -1,8 +1,12 @@
 package Model;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import javax.swing.JOptionPane;
+
 import Main.ClientController;
 
 /**
@@ -16,8 +20,9 @@ import Main.ClientController;
 public class ClientSocket {
 	
 	private static final String IPADDRESS = "hanzegameserver.nl";
-//	private static final String IPADDRESS = "play-serverzone.ddns.net";
-//	private static final String IPADDRESS = "127.0.0.1";
+	//private static final String IPADDRESS = "play-serverzone.ddns.net";
+	//private static final String IPADDRESS = "127.0.0.1";
+	//private final String IPADDRESS = "82.73.252.248"; // server chris
 	
 	private static final int PORTNUMBER = 7789;
 	private Socket socket;
@@ -45,10 +50,16 @@ public class ClientSocket {
 	 * @throws IOException signals that an I/O exception of some sort has occurred.
 	 */
 	public void connectToServer() throws UnknownHostException, IOException {
-		socket = new Socket(IPADDRESS, PORTNUMBER);
-		Thread socketListener = new Thread(new SocketListener(socket, serverMessageHandler));
-		socketListener.start();			
-		System.out.println("CONNECTION MADE");
+		try {
+			socket = new Socket(IPADDRESS, PORTNUMBER);
+			Thread socketListener = new Thread(new SocketListener(socket, serverMessageHandler));
+			socketListener.start();			
+			System.out.println("CONNECTION MADE");
+		} catch (ConnectException e) {
+			JOptionPane.showMessageDialog(
+		               controller.getView(),
+		                "Server could not be reached!");
+		}
 	}
 
 	/**
