@@ -43,6 +43,8 @@ public class OthelloModel extends AbstractGameModule {
 	
 	private static final int[] OFFSET_X = {-1, -1, -1,  0,  0,  1,  1,  1};
 	private static final int[] OFFSET_Y = {-1,  0,  1, -1,  1, -1,  0,  1};
+	
+	private int coinHeuristic;
 
 	public OthelloModel(String playerOne, String playerTwo) {
 		super(playerOne, playerTwo);
@@ -184,13 +186,13 @@ public class OthelloModel extends AbstractGameModule {
 		int[][] tempBoard = new int[8][8];
 		double bestValue = 0.0;
 		if(side.equals(playerOne)){
-			//bestValue = Double.NEGATIVE_INFINITY;
-			bestValue = -60;
-			//bestValue = -600;
+			bestValue = Double.NEGATIVE_INFINITY;
+			//bestValue = -60;
+			//bestValue = -100;
 		}else if(side.equals(playerTwo)){
-			//bestValue = Double.POSITIVE_INFINITY;
-			bestValue = 60;
-			//bestValue = 600;
+			bestValue = Double.POSITIVE_INFINITY;
+			//bestValue = 60;
+			//bestValue = 100;
 		}
 		for(int i = 0; i < 8; i++){
 			for(int j = 0; j < 8; j++){
@@ -217,15 +219,15 @@ public class OthelloModel extends AbstractGameModule {
 								reply[1] = i;
 							}
 						}
-						reply[2] = bestValue; //+ sBOARD_VALUE[j][i];
+						reply[2] = bestValue + sBOARD_VALUE[j][i] + coinHeuristic;
 						
 						tempBoard[j][i] = EMPTY;
 					}else{
 						int winning = checkWhoWon(tempBoard);
 						if(winning == PLAYER1_WIN){
-							bestValue = 60 - depth;// + sBOARD_VALUE[j][i];
+							bestValue = 100 - depth + sBOARD_VALUE[j][i] + coinHeuristic;
 						}else if(winning == PLAYER2_WIN){
-							bestValue = depth - 60;// - sBOARD_VALUE[j][i];
+							bestValue = depth - 100 - sBOARD_VALUE[j][i] - coinHeuristic;
 						}else{
 							bestValue = 0;
 						}
@@ -481,6 +483,8 @@ public class OthelloModel extends AbstractGameModule {
 						player2++;
 				}
 			}
+			
+			coinHeuristic = 100 * ((player1 - player2)/(player1 + player2));
 
 			if(player1 == player2 )
 				return DRAW;
