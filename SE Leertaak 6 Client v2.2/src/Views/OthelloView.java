@@ -27,13 +27,15 @@ public class OthelloView extends JPanel {
 	}
 
 	private void createButtons(OthelloController othelloController) {
+		int index = 0;
 		for(int i = 0; i < buttons.length; i++) {
             for(int j = 0; j < buttons[i].length; j++) {
             	buttons[i][j] = new JButton();
             	buttons[i][j].setIcon(defaultImage);
             	buttons[i][j].addActionListener(othelloController);
-            	buttons[i][j].setActionCommand(OthelloController.COMMAND_MOVE + " "+ i + "," + j);
+            	buttons[i][j].setActionCommand(OthelloController.COMMAND_MOVE + " "+ index);
             	add(buttons[i][j]);
+            	index++;
             }
 		}
 	}

@@ -67,7 +67,6 @@ public class OthelloController extends GameController {
 					othelloModel.doPlayerMove(match.getOpponent(), move);
 					othelloView.updateView(othelloModel.getBoard());
 					othelloModel.setSide(OthelloModel.ME);
-					
 				} else {
 					int x = Integer.parseInt(move.split(",")[0]);
 					int y = Integer.parseInt(move.split(",")[1]);
@@ -83,15 +82,21 @@ public class OthelloController extends GameController {
 			}
 			break;
 		case COMMAND_YOURTURN:
-			othelloModel.setSide(OthelloModel.ME);
 			if (!clientController.getModel().getHuman()) {
-				double[] doubleMoveAi = othelloModel.doAIMove(clientController.getModel().getClientName(), 5, othelloModel.getBoard());
-				String stringMoveAi = String.valueOf((int) doubleMoveAi[0]) + "," + String.valueOf((int) doubleMoveAi[1]);
-				othelloModel.doPlayerMove(clientController.getModel().getClientName(), stringMoveAi);
+				try {
+					othelloModel.setSide(OthelloModel.ME);
+					double[] doubleMoveAi = othelloModel.doAIMove(clientController.getModel().getClientName(), 6, othelloModel.getBoard());
+					String stringMoveAi = String.valueOf((int) doubleMoveAi[0]) + "," + String.valueOf((int) doubleMoveAi[1]);
+					clientController.getModel().doMove(stringMoveAi);
+					othelloModel.doPlayerMove(clientController.getModel().getClientName(), stringMoveAi);
+					othelloView.updateView(othelloModel.getBoard());
+					othelloModel.setSide(OthelloModel.OPPONENT);
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
 			} else {
 				othelloView.unlockButtons();
 			}
-			
 			break;
 		}
 	}
