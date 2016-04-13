@@ -20,12 +20,21 @@ public class CellPanel extends JPanel {
         	record.challenge();
         }
     };
+    private Action messageAction = new AbstractAction("Message") {
+		private static final long serialVersionUID = 1L;
+
+		public void actionPerformed(ActionEvent e) {
+        	record.chat();
+        }
+    };
     
     private final JButton button = new JButton(challengeAction);
+    private final JButton chatbutton = new JButton(messageAction);
 
     public CellPanel() {
         add(field);
         add(button);
+        add(chatbutton);
     }
 
     public void setRecord(Record record) {

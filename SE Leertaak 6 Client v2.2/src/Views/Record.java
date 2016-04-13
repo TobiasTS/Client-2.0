@@ -21,4 +21,7 @@ public class Record {
     public void challenge(){
     	controller.actionPerformed(new ActionEvent(this, 0, ClientController.COMMAND_CHALLENGE+ " " + challenged));
     }
+    public void chat(){
+    	controller.actionPerformed(new ActionEvent(this, 0, ClientController.COMMAND_MESSAGE+ " " + challenged));
+    }
 }

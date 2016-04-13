@@ -31,9 +31,7 @@ public class ServerMessageHandler {
 	public void handleMessage(String message) {
 		try{
 			
-			if(message.split(" ")[4].equals("MESSAGE:")){
-				System.out.println("DEBUG -- " + message.split(" ")[4]);
-			
+			if(message.split(" ")[4].equals("MESSAGE:")){			
 				//playername 
 				String playername = message.split("\"")[1];
 				
@@ -47,7 +45,8 @@ public class ServerMessageHandler {
 				if(reply != null)
 					controller.getModel().chat(playername, reply);
 				
-				
+				System.out.println("HANDLED MESSAGE: MESSAGE");
+				return;
 			}
 		}catch(ArrayIndexOutOfBoundsException e){
 			
