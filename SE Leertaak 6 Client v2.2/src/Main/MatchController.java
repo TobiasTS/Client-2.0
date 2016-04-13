@@ -34,6 +34,11 @@ public class MatchController {
 		forfeitButton.setActionCommand(ClientController.COMMAND_FORFEIT);
 		matchView.add(forfeitButton);
 		
+		JButton messageButton = new JButton("Message");
+		messageButton.addActionListener(clientController);
+		messageButton.setActionCommand(ClientController.COMMAND_MESSAGE);
+		matchView.add(messageButton);
+		
 		if (gameType.contains(GAME_TIC_TAC_TOE)) {
 			gameController = new TicTacToeController(clientController, clientController.getModel().getMatch());
 			panelGame.add(((TicTacToeController) gameController).getTicTacToeView(), createConstraints(false));
