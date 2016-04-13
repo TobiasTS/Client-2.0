@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import Model.ClientModel;
 import Views.ChallengeView;
 import Views.ClientView;
+import Views.MessageView;
 import Views.forfeitView;
 
 public class ClientController implements ActionListener {
@@ -21,6 +22,9 @@ public class ClientController implements ActionListener {
 	public static final String COMMAND_SUBSCRIBE = "SUBSCRIBE";
 	public static final String COMMAND_UNSUBSCRIBE = "UNSUBSCRIBE";
 	public static final String COMMAND_FORFEIT = "FORFEIT";
+	public static final String COMMAND_MESSAGE = "MESSAGE";
+	public static final String COMMAND_ENABLE_MESSAGE = "ENABLEMESSAGE";
+	public static final String COMMAND_DISABLE_MESSAGE = "DISABLEMESSAGE";
 	
 	public static final String GAME_TIC_TAC_TOE = "Tic-tac-toe";
 	public static final String GAME_OTHELLO = "Reversi";
@@ -36,10 +40,11 @@ public class ClientController implements ActionListener {
 	private int status = STATUS_READY;
 	
 	public boolean inAMatch = false;
+	public boolean chatEnabled = true;
 	
 	public ClientController() {
 		model = new ClientModel(this);
-		view = new ClientView("Client v2.6", this);
+		view = new ClientView("Client v2.7", this);
 		games.add(GAME_TIC_TAC_TOE);
 		games.add(GAME_OTHELLO);
 	}
@@ -60,6 +65,7 @@ public class ClientController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		command = command.contains(" ") ? command.split(" ")[0]: command;
+		
 		switch (command) {
 		case COMMAND_USER_LOGIN:
 			try {
@@ -145,6 +151,21 @@ public class ClientController implements ActionListener {
 						ex.printStackTrace();
 					}
 			}
+			break;
+		case COMMAND_MESSAGE:
+			String player2 = e.getActionCommand().substring(7);
+			MessageView messageView = new MessageView(player2);
+			status = STATUS_WAITING;
+			while (status == STATUS_WAITING && messageView.getChoice() != null) {
+					status = STATUS_READY;
+					model.chat(player2, messageView.getChoice());
+			}
+			break;
+		case COMMAND_ENABLE_MESSAGE:
+				chatEnabled = true;
+			break;
+		case COMMAND_DISABLE_MESSAGE:
+				chatEnabled = false;
 			break;
 		}
 	}

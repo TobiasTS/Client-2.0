@@ -373,5 +373,14 @@ public class ClientModel {
  		}
 		return null;
 	}
+	
+	public void chat(String playername, String reply) {
+		try {
+			clientSocket.writeToServer("message \"" + playername + "\" \"" + reply + "\"");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
 

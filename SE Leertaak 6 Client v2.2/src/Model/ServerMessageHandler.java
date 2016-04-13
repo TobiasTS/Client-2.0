@@ -29,10 +29,38 @@ public class ServerMessageHandler {
 	}
 	
 	public void handleMessage(String message) {
+		try{
+			
+			//if(message.split(" ")[4].equals("MESSAGE:")){
+			if(message.substring(message.indexOf(",")).contains(" MESSAGE: ") && controller.chatEnabled
+					){		
+				//playername 
+				String playername = message.split("\"")[1];
+				
+				//message
+				String bericht = message.split("\"")[3];
+				
+				String reply = JOptionPane.showInputDialog(
+			               controller.getView(),
+			                playername + ": "+ bericht + ". \nWrite a reply:");
+				
+				if(reply != null)
+					controller.getModel().chat(playername, reply);
+				
+				System.out.println("HANDLED MESSAGE: MESSAGE");
+				return;
+			}
+		}
+		catch(ArrayIndexOutOfBoundsException e){}
+		catch(StringIndexOutOfBoundsException e){}
+		
 		if(message.equals(MESSAGE_LOGIN_ERROR)) {
 			System.out.println("HANDLED MESSAGE: ERROR LOGIN");
 			try {
 				controller.getModel().closeConnection();
+				JOptionPane.showMessageDialog(
+			               controller.getView(),
+			                "Duplicate name found!");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

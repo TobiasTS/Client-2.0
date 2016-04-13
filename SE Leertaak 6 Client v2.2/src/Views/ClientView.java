@@ -24,6 +24,9 @@ public class ClientView extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu menuFile;
 	
+	private JMenuBar menuBar2;
+	private JMenu menuFile2;
+	
 	public ClientView(String name, ClientController controller) {
 		super(name);
 		this.controller = controller;
@@ -40,7 +43,7 @@ public class ClientView extends JFrame {
 		
 		setView(loginView);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setName("Client v2.2");
+		setName("Client v2.7");
 		setVisible(true);
 		pack();
 		
@@ -56,6 +59,7 @@ public class ClientView extends JFrame {
 	public void setLobbyScreen() {
 		createLobby();
 		menuFile.setEnabled(true);
+		menuFile2.setEnabled(true);
 
 		setView(lobbyView);
 	}
@@ -67,10 +71,9 @@ public class ClientView extends JFrame {
 	
 	public void setLoginScreen() {
 		menuFile.setEnabled(false);
+		menuFile2.setEnabled(false);
 
 		setView(loginView);
-		
-
 	}
 	
 	public void registerView(JPanel view) {
@@ -117,6 +120,24 @@ public class ClientView extends JFrame {
 		menuFile.add(itemLogout);
 		
 		menuBar.add(menuFile);
+		
+		menuBar2 = new JMenuBar();
+		//File menu
+		menuFile2 = new JMenu("Options");
+		menuFile2.setEnabled(false);
+		//Player list item
+		JMenuItem disableMessage = new JMenuItem("Disable Message");
+		disableMessage.setActionCommand(ClientController.COMMAND_DISABLE_MESSAGE);
+		disableMessage.addActionListener(controller);
+		//Game list item
+		JMenuItem enableMessage = new JMenuItem("Enable Message");
+		enableMessage.setActionCommand(ClientController.COMMAND_ENABLE_MESSAGE);
+		enableMessage.addActionListener(controller);
+				
+		menuFile2.add(disableMessage);
+		menuFile2.add(enableMessage);
+		
+		menuBar.add(menuFile2);
 	}
 
 	private JMenu createSubscribeMenu() {
