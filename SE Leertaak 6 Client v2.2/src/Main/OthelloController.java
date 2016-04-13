@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import Model.MatchModel;
 import Model.OthelloModel;
-import Model.ServerMessageHandler;
-import Model.TicTacToeModel;
 import Views.OthelloView;
 
 public class OthelloController extends GameController {
@@ -64,15 +62,17 @@ public class OthelloController extends GameController {
 			String move = e.getActionCommand().split(" ")[1];		
 			try {
 				if (othelloModel.getSide() == OthelloModel.OPPONENT) {
-					othelloModel.doPlayerMove(match.getOpponent(), move);
+					int x = Integer.parseInt(move) / 8;
+					int y = Integer.parseInt(move) % 8;
+					othelloModel.doPlayerMove(match.getOpponent(), x + "," + y);
 					othelloView.updateView(othelloModel.getBoard());
 					othelloModel.setSide(OthelloModel.ME);
 				} else {
-					int x = Integer.parseInt(move.split(",")[0]);
-					int y = Integer.parseInt(move.split(",")[1]);
+					int x = Integer.parseInt(move) / 8;
+					int y = Integer.parseInt(move) % 8;
 					if (othelloModel.moveIsLegal(x, y, false, othelloModel.getBoard())) {
 						clientController.getModel().doMove(move);
-						othelloModel.doPlayerMove(clientController.getModel().getClientName(), move);
+						othelloModel.doPlayerMove(clientController.getModel().getClientName(), x + "," + y);
 						othelloView.updateView(othelloModel.getBoard());
 						othelloModel.setSide(OthelloModel.OPPONENT);	
 					}				
@@ -87,7 +87,7 @@ public class OthelloController extends GameController {
 					othelloModel.setSide(OthelloModel.ME);
 					double[] doubleMoveAi = othelloModel.doAIMove(clientController.getModel().getClientName(), 6, othelloModel.getBoard());
 					String stringMoveAi = String.valueOf((int) doubleMoveAi[0]) + "," + String.valueOf((int) doubleMoveAi[1]);
-					clientController.getModel().doMove(stringMoveAi);
+					clientController.getModel().doMove(String.valueOf((int)doubleMoveAi[0] * 8 + (int)doubleMoveAi[1]));
 					othelloModel.doPlayerMove(clientController.getModel().getClientName(), stringMoveAi);
 					othelloView.updateView(othelloModel.getBoard());
 					othelloModel.setSide(OthelloModel.OPPONENT);
