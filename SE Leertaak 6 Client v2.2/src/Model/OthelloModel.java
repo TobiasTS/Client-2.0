@@ -6,6 +6,9 @@ import java.util.HashMap;
 public class OthelloModel extends AbstractGameModule {
 	
 	public static final String GAME_TYPE = Game.GAME_TYPE;
+	public static final int OPPONENT = 0;
+	public static final int ME = 1;
+	private int side;
 	
 	private GameView gameView;
 	private String nextPlayer;
@@ -41,7 +44,6 @@ public class OthelloModel extends AbstractGameModule {
 	private static final int[] OFFSET_X = {-1, -1, -1,  0,  0,  1,  1,  1};
 	private static final int[] OFFSET_Y = {-1,  0,  1, -1,  1, -1,  0,  1};
 
-	
 	public OthelloModel(String playerOne, String playerTwo) {
 		super(playerOne, playerTwo);
 		
@@ -53,6 +55,14 @@ public class OthelloModel extends AbstractGameModule {
 	
 	public int[][] getBoard() {
 		return board;
+	}
+	
+	public int getSide() {
+		return side;
+	}
+	
+	public void setSide(int side) {
+		this.side = side;
 	}
 	
 
