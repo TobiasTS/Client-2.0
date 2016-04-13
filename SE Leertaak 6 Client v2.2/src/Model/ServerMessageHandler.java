@@ -67,6 +67,7 @@ public class ServerMessageHandler {
 			}
 		}
 		else if(message.contains(MESSAGE_RESULT)) {
+			controller.inAMatch = false;
 			System.out.println("HANDLED MESSAGE: RESULT");
 			try {
 				controller.getModel().getPlayerListCommand();
@@ -78,8 +79,15 @@ public class ServerMessageHandler {
 		}
 		else if(message.contains(MESSAGE_CHALLENGE)) {
 			System.out.println("HANDLED MESSAGE: CHALLENGE");
-			controller.getModel().setChallenge(message);
-			controller.createChallengeController();
+			if(!controller.inAMatch) {
+				controller.getModel().setChallenge(message);
+				controller.createChallengeController();
+				System.out.print("HANDLED MESSAGE: CHALLENGE ACCEPTED");
+			}
+			else {
+				System.out.print("HANDLED MESSAGE: CHALLENGE IGNORED");
+			}
+
 		}
 		else if(message.contains(MESSAGE_CHALLENGE_CANCELLED)) {
 			System.out.println("HANDLED MESSAGE: CANCELLED");

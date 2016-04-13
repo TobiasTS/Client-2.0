@@ -33,12 +33,14 @@ public class MatchController {
 			panelGame.add(matchView, createConstraints(true));
 			clientController.getView().registerView(panelGame);
 			clientController.getView().setView(panelGame);
+			clientController.inAMatch = true;
 		} else if (gameType.contains(GAME_OTHELLO)) {
 			gameController = new OthelloController(clientController, clientController.getModel().getMatch());
 			panelGame.add(((OthelloController) gameController).getOthelloView(), createConstraints(false));
 			panelGame.add(matchView, createConstraints(true));
 			clientController.getView().registerView(panelGame);
 			clientController.getView().setView(panelGame);
+			clientController.inAMatch = true;
 		}
 		
 	}

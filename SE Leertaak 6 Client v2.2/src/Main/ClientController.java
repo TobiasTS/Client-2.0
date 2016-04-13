@@ -33,6 +33,8 @@ public class ClientController implements ActionListener {
 	
 	private int status = STATUS_READY;
 	
+	public boolean inAMatch = false;
+	
 	public ClientController() {
 		model = new ClientModel(this);
 		view = new ClientView("Client v2.6", this);

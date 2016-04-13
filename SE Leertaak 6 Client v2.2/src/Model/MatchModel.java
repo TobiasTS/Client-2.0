@@ -6,7 +6,7 @@ public class MatchModel {
 	private String gameType;
 	private String opponent;
 	
-	public MatchModel(String playerToMove, String gameType,  String opponent) {
+	public MatchModel(String playerToMove, String gameType, String opponent) {
 		this.playerToMove = playerToMove;
 		this.gameType = gameType;
 		this.opponent = opponent;
