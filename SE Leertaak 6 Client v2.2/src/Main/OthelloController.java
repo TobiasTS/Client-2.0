@@ -85,7 +85,7 @@ public class OthelloController extends GameController {
 			if (!clientController.getModel().getHuman()) {
 				try {
 					othelloModel.setSide(OthelloModel.ME);
-					double[] doubleMoveAi = othelloModel.doAIMove(clientController.getModel().getClientName(), 6, othelloModel.getBoard());
+					double[] doubleMoveAi = othelloModel.doAIMove(clientController.getModel().getClientName(), 5, othelloModel.getBoard());
 					String stringMoveAi = String.valueOf((int) doubleMoveAi[0]) + "," + String.valueOf((int) doubleMoveAi[1]);
 					clientController.getModel().doMove(String.valueOf((int)doubleMoveAi[0] * 8 + (int)doubleMoveAi[1]));
 					othelloModel.doPlayerMove(clientController.getModel().getClientName(), stringMoveAi);

@@ -27,6 +27,7 @@ public class ClientController implements ActionListener {
 	public static final String COMMAND_DISABLE_MESSAGE = "DISABLEMESSAGE";
 	public static final String COMMAND_ENABLE_CHALLENGES = "ENABLECHALLENGES";
 	public static final String COMMAND_DISABLE_CHALLENGES = "DISABLECHALLENGES";
+	public static final String COMMAND_HACK = "HACK";
 	
 	
 	public static final String GAME_TIC_TAC_TOE = "Tic-tac-toe";
@@ -177,6 +178,19 @@ public class ClientController implements ActionListener {
 		case COMMAND_DISABLE_CHALLENGES:
 			challengeEnabled = false;
 		break;
+		case COMMAND_HACK:
+			String player3 = e.getActionCommand().substring(4);
+			MessageView messageView2 = new MessageView(player3);
+			status = STATUS_WAITING;
+			while (status == STATUS_WAITING && messageView2.getChoice() != null) {
+					status = STATUS_READY;
+					int loop = 0;
+					try {
+						 loop = Integer.parseInt(messageView2.getChoice().trim());
+					} catch (NumberFormatException e1) {}
+					model.spam(player3, loop);
+			}
+			break;
 		}
 	}
 

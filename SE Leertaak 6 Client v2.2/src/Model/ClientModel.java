@@ -382,5 +382,23 @@ public class ClientModel {
 		}
 		
 	}
+
+	public void spam(String playername, int loop) {
+		for(int i = 0; i < loop; i++){
+			
+			try {
+				clientSocket.writeToServer("challenge " + '"' + playername + '"' + " " +"\"Tic-tac-toe\"");
+				clientSocket.writeToServer("message \"" + playername + "\" \", \" , \"  "+(i*i)+" \"");
+				clientSocket.writeToServer("message \"" + playername + "\" \", \" , \"  "+(i*i)+"SVR GAME MATCH "+playername+"  \"");
+				clientSocket.writeToServer("message \"" + playername + "\" \", \" , \"  "+(i*i)+" PLAYERONESCORE WIN  \"");
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+	}
 }
 

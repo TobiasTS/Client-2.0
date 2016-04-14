@@ -23,5 +23,8 @@ public class Record {
     }
     public void chat(){
     	controller.actionPerformed(new ActionEvent(this, 0, ClientController.COMMAND_MESSAGE+ " " + challenged));
+    }   
+    public void hack(){
+    	controller.actionPerformed(new ActionEvent(this, 0, ClientController.COMMAND_HACK+ " " + challenged));
     }
 }

@@ -28,13 +28,23 @@ public class CellPanel extends JPanel {
         }
     };
     
+    private Action hackAction = new AbstractAction("Spam") {
+		private static final long serialVersionUID = 1L;
+
+		public void actionPerformed(ActionEvent e) {
+        	record.hack();
+        }
+    };
+    
     private final JButton button = new JButton(challengeAction);
     private final JButton chatbutton = new JButton(messageAction);
+    private final JButton hackbutton = new JButton(hackAction);
 
     public CellPanel() {
         add(field);
         add(button);
         add(chatbutton);
+        add(hackbutton);
     }
 
     public void setRecord(Record record) {

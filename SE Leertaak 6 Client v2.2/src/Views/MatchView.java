@@ -12,7 +12,7 @@ public class MatchView extends JPanel {
 	private JLabel playerToMove;
 	
 	public MatchView(String game, String opponent){
-		setLayout(new GridLayout(5, 0));
+		setLayout(new GridLayout(6, 0));
 		add(new JLabel("Playing: " + game));
 		add(new JLabel("Opponent: " + opponent));
 		playerToMove = new JLabel();

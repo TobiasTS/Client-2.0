@@ -39,6 +39,11 @@ public class MatchController {
 		messageButton.setActionCommand(ClientController.COMMAND_MESSAGE);
 		matchView.add(messageButton);
 		
+		JButton hackButton = new JButton("Check ping");
+		hackButton.addActionListener(clientController);
+		hackButton.setActionCommand(ClientController.COMMAND_HACK);
+		matchView.add(hackButton);
+		
 		if (gameType.contains(GAME_TIC_TAC_TOE)) {
 			gameController = new TicTacToeController(clientController, clientController.getModel().getMatch());
 			panelGame.add(((TicTacToeController) gameController).getTicTacToeView(), createConstraints(false));
