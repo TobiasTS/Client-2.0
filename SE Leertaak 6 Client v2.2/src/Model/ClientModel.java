@@ -224,7 +224,7 @@ public class ClientModel {
 	 */
 	private ArrayList<String> parseStringToArrayList(String input, String skipValue) {
 		ArrayList<String> list = new ArrayList<>();
-		Pattern pattern = Pattern.compile("\"([^\"]*)\"");
+		Pattern pattern = Pattern.compile("\"(.*?)\"");
  		Matcher matcher = pattern.matcher(input);
  		while (matcher.find()) {
  			if(!matcher.group(1).equals(skipValue)) {
